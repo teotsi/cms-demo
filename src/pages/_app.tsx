@@ -1,7 +1,12 @@
 import Head from "next/head";
 import 'semantic-ui-css/semantic.min.css';
+import { useStore } from "../zustand/store";
 
-const BaseApp = ({ Component, pageProps }) => (
+const BaseApp = ({ Component, pageProps }) => {
+    const fetchPois = useStore(state => state.fetchPois);
+    fetchPois();
+    
+    return(
     <>
         <Head>
             <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
@@ -13,6 +18,6 @@ const BaseApp = ({ Component, pageProps }) => (
         </Head>
         <Component {...pageProps} />
     </>
-)
+)}
 
 export default BaseApp;
