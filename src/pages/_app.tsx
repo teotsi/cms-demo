@@ -1,4 +1,5 @@
 import Head from "next/head";
+import 'semantic-ui-css/semantic.min.css';
 
 const BaseApp = ({ Component, pageProps }) => (
     <>
