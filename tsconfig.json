@@ -1,0 +1,31 @@
+{
+  "include": [
+    "**/*"
+  ],
+  "compilerOptions": {
+    "target": "es6",
+    "jsx": "preserve",
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": false,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "paths": {
+        "app/*": ["./src/*"]
+    },
+    "isolatedModules": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
