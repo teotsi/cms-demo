@@ -7,8 +7,10 @@ const Home = () => {
     { ssr: false } // This line is important. It's what prevents server-side render
   )
   return (
-    <div style={{ margin: 'auto', width: '70%' }}>
-      <Map />
+    <div className="mx-auto w-2/6">
+      <div style={{zoom: '100%'}}>
+        <Map />
+      </div>
       <PoiForm/>
     </div>
   )
