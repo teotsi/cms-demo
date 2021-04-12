@@ -9,7 +9,9 @@ const PoiForm = () => {
     const setName = useStore(state => state.setPointName);
     const setAmenity = useStore(state => state.setPointAmenity);
     const fetchPois = useStore(state => state.fetchPois);
-
+    const resetForm = useStore(state => state.resetForm);
+    const disabled = ! (customPoint?.name && customPoint?.amenity);
+    
     const options = [
         { key: 1, text: 'classroom', value: 1 },
         { key: 2, text: 'cslab', value: 2 },
@@ -24,9 +26,11 @@ const PoiForm = () => {
       ]
     
     const addPoi = () => {
-        console.log(customPoint)
         axios.post("http://localhost:8081/poi", customPoint)
-        .then((res)=> fetchPois());
+        .then((res)=>{
+            resetForm();
+            fetchPois();
+            });
     }
     return (
         <div style={{ marginTop: 20 }}>
@@ -35,13 +39,16 @@ const PoiForm = () => {
                 <>
                     <p>Lat: {customPoint?.lat}</p>
                     <p>Lon: {customPoint?.lon}</p>
-                    <Input placeholder="name" onChange={(e) => setName(e.target.value)} />
-                    <Dropdown style={{display:'block', width: '30%'}}
-                     selection 
-                     options={options}
-                     scrolling
-                     onChange={(e, {value})=> setAmenity(options[value as number].text)}/>
-                    <Button disabled={!customPoint.name} primary onClick={addPoi}>Add POI</Button>
+                    <Input className="mt-2" placeholder="name" onChange={(e) => setName(e.target.value)} />
+                    <div>
+
+                        <Dropdown className="w-30 my-2"
+                        selection 
+                        options={options}
+                        scrolling
+                        onChange={(e, {value})=> setAmenity(options[value as number].text)}/>
+                    </div>
+                    <Button disabled={ disabled } primary onClick={addPoi}>Add POI</Button>
                 </>
             }
         </div>

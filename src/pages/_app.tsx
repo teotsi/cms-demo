@@ -1,5 +1,6 @@
 import Head from "next/head";
 import 'semantic-ui-css/semantic.min.css';
+import '../assets/tailwind.css';
 import { useStore } from "../zustand/store";
 
 const BaseApp = ({ Component, pageProps }) => {

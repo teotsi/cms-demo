@@ -22,7 +22,6 @@ export const useStore = create<State>(set => ({
   resetForm: () => set(initialState),
   fetchPois: async () => {
     const { data } = await axios.get("http://localhost:8081/poi");
-    console.log(data)
     set(state => ({ ...state, pointsOfInterest: data }));
   }
 }))
