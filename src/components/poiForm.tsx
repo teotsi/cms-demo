@@ -1,6 +1,6 @@
 import axios from 'axios';
-import React from 'react';
-import { Button, Dropdown, Input } from 'semantic-ui-react';
+import React, { useState } from 'react';
+import { Button, Dropdown, Input, Loader } from 'semantic-ui-react';
 import { useStore } from '../zustand/store';
 
 const PoiForm = () => {
@@ -10,8 +10,8 @@ const PoiForm = () => {
     const setAmenity = useStore(state => state.setPointAmenity);
     const fetchPois = useStore(state => state.fetchPois);
     const resetForm = useStore(state => state.resetForm);
-    const disabled = ! (customPoint?.name && customPoint?.amenity);
-    
+    const disabled = !(customPoint?.name && customPoint?.amenity);
+    const [loading, setLoading] = useState(false);
     const options = [
         { key: 1, text: 'classroom', value: 1 },
         { key: 2, text: 'cslab', value: 2 },
@@ -23,34 +23,44 @@ const PoiForm = () => {
         { key: 8, text: 'service', value: 8 },
         { key: 9, text: 'store', value: 9 },
         { key: 10, text: 'toilets', value: 10 },
-      ]
-    
+    ]
+
     const addPoi = () => {
+        setLoading(true);
         axios.post("http://localhost:8081/poi", customPoint)
-        .then((res)=>{
-            resetForm();
-            fetchPois();
+            .then((res) => {
+                setLoading(false);
+                resetForm();
+                fetchPois();
             });
     }
     return (
-        <div style={{ marginTop: 20 }}>
-            <h3>Click on the map to create a new POI</h3>
-            {customPoint &&
+        <div className="mt-5 flex justify-center">
+            <div>
+                <h3 className="text-xl font-semibold">Click on the map to create a new POI</h3>
                 <>
-                    <p>Lat: {customPoint?.lat}</p>
-                    <p>Lon: {customPoint?.lon}</p>
+                    <p>Lat: <span className="font-bold">{customPoint?.lat ?? '----'}</span></p>
+                    <p>Lon: <span className="font-bold">{customPoint?.lon ?? '----'}</span></p>
                     <Input className="mt-2" placeholder="name" onChange={(e) => setName(e.target.value)} />
                     <div>
 
                         <Dropdown className="w-30 my-2"
-                        selection 
-                        options={options}
-                        scrolling
-                        onChange={(e, {value})=> setAmenity(options[value as number].text)}/>
+                            selection
+                            options={options}
+                            scrolling
+                            onChange={(e, { value }) => setAmenity(options[value as number].text)} />
                     </div>
-                    <Button disabled={ disabled } primary onClick={addPoi}>Add POI</Button>
+                    <div className="flex items-center">
+                        <Button
+                          className="ml-2" 
+                          disabled={disabled}
+                          primary 
+                          onClick={addPoi}>Add POI</Button>
+                        <Loader active={loading} inline size='tiny'/>
+                    </div>
                 </>
-            }
+            </div>
+
         </div>
     )
 }
