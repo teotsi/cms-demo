@@ -21,7 +21,7 @@ export const useStore = create<State>(set => ({
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
   resetForm: () => set(initialState),
   fetchPois: async () => {
-    const { data } = await axios.get("https://aia-pasag.slm.gr/api/poi");
+    const { data } = await axios.get("https://aia-pasag.slm.gr/poi");
     set(state => ({ ...state, pointsOfInterest: data }));
   }
 }))
