@@ -2,11 +2,11 @@ import create from 'zustand';
 import { getAllPointsOfInterest } from '../utils/apiService';
 
 type State = {
-  customPoint: Record<string, string | number>,
-  pointsOfInterest: Record<string, any>[],
-  setPoint: (newPoint) => void,
-  setPointName: (newName) => void,
-  setPointAmenity: (newAmenity) => void,
+  customPoint: PointOfInterest,
+  pointsOfInterest: PointOfInterest[],
+  setPoint: (newPoint: PointOfInterest) => void,
+  setPointName: (newName: string) => void,
+  setPointAmenity: (newAmenity: string) => void,
   resetForm: () => void,
   fetchPois: () => void,
 }

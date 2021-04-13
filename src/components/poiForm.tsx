@@ -13,16 +13,16 @@ const PoiForm = () => {
     const disabled = !(customPoint?.name && customPoint?.amenity);
     const [loading, setLoading] = useState(false);
     const options = [
-        { key: 1, text: 'classroom', value: 1 },
-        { key: 2, text: 'cslab', value: 2 },
-        { key: 3, text: 'gate', value: 3 },
-        { key: 4, text: 'hall', value: 4 },
-        { key: 5, text: 'library', value: 5 },
-        { key: 6, text: 'office', value: 6 },
-        { key: 7, text: 'restaurant', value: 7 },
-        { key: 8, text: 'service', value: 8 },
-        { key: 9, text: 'store', value: 9 },
-        { key: 10, text: 'toilets', value: 10 },
+        { key: 1, text: 'classroom', value: 'classroom' },
+        { key: 2, text: 'cslab', value: 'cslab' },
+        { key: 3, text: 'gate', value: 'gate' },
+        { key: 4, text: 'hall', value: 'hall' },
+        { key: 5, text: 'library', value: 'library' },
+        { key: 6, text: 'office', value: 'office' },
+        { key: 7, text: 'restaurant', value: 'restaurant' },
+        { key: 8, text: 'service', value: 'service' },
+        { key: 9, text: 'store', value: 'store' },
+        { key: 10, text: 'toilets', value: 'toilets' },
     ]
 
     const addPoi = () => {
@@ -47,15 +47,15 @@ const PoiForm = () => {
                             selection
                             options={options}
                             scrolling
-                            onChange={(e, { value }) => setAmenity(options[value as number].text)} />
+                            onChange={(e, { value }) => setAmenity(value as string)} />
                     </div>
                     <div className="flex items-center">
                         <Button
-                          className="ml-2" 
-                          disabled={disabled}
-                          primary 
-                          onClick={addPoi}>Add POI</Button>
-                        <Loader active={loading} inline size='tiny'/>
+                            className="ml-2"
+                            disabled={disabled}
+                            primary
+                            onClick={addPoi}>Add POI</Button>
+                        <Loader active={loading} inline size='tiny' />
                     </div>
                 </>
             </div>
