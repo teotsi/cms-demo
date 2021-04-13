@@ -29,7 +29,7 @@ const Map = () => {
   const pointsOfInterest = useStore(state => state.pointsOfInterest);
 
   return (
-    <MapContainer center={[37.99408909, 23.73246165]} zoom={19} scrollWheelZoom={false} style={{ height: 600 }}>
+    <MapContainer center={[37.99408909, 23.73246165]} zoom={19} scrollWheelZoom={false} style={{ height: 600, zIndex: 0 }}>
       <TileLayer
         maxZoom={20}
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
