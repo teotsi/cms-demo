@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useState } from 'react';
 import { Button, Dropdown, Input, Loader } from 'semantic-ui-react';
+import { registerPointOfInterest } from '../utils/apiService';
 import { useStore } from '../zustand/store';
 
 const PoiForm = () => {
@@ -27,12 +27,11 @@ const PoiForm = () => {
 
     const addPoi = () => {
         setLoading(true);
-        axios.post("https://aia-pasag.slm.gr/api/poi", customPoint)
-            .then((res) => {
-                setLoading(false);
-                resetForm();
-                fetchPois();
-            });
+        registerPointOfInterest(customPoint).then(() => {
+            setLoading(false);
+            resetForm();
+            fetchPois();
+        });
     }
     return (
         <div className="mt-5 flex justify-center">

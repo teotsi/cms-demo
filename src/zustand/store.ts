@@ -1,5 +1,5 @@
-import axios from 'axios';
 import create from 'zustand';
+import { getAllPointsOfInterest } from '../utils/apiService';
 
 type State = {
   customPoint: Record<string, string | number>,
@@ -21,7 +21,7 @@ export const useStore = create<State>(set => ({
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
   resetForm: () => set(initialState),
   fetchPois: async () => {
-    const { data } = await axios.get("https://aia-pasag.slm.gr/api/poi");
-    set(state => ({ ...state, pointsOfInterest: data }));
+    const pois = await getAllPointsOfInterest();
+    set(state => ({ ...state, pointsOfInterest: pois }));
   }
 }))
