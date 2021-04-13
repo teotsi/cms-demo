@@ -27,7 +27,7 @@ const PoiForm = () => {
 
     const addPoi = () => {
         setLoading(true);
-        axios.post("https://aia-pasag.slm.gr/poi", customPoint)
+        axios.post("https://aia-pasag.slm.gr/api/poi", customPoint)
             .then((res) => {
                 setLoading(false);
                 resetForm();
