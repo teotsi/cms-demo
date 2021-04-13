@@ -4,7 +4,7 @@ import { getAllPointsOfInterest } from '../utils/apiService';
 type State = {
   customPoint: PointOfInterest,
   pointsOfInterest: PointOfInterest[],
-  setPoint: (newPoint: PointOfInterest) => void,
+  setPoint: (coordinates: Coordinates) => void,
   setPointName: (newName: string) => void,
   setPointAmenity: (newAmenity: string) => void,
   resetForm: () => void,
@@ -16,7 +16,7 @@ const initialState = {
 }
 export const useStore = create<State>(set => ({
   ...initialState,
-  setPoint: (newPoint) => set(state => ({ ...state, customPoint: newPoint })),
+  setPoint: (coordinates) => set(state => ({ ...state, customPoint: { ...state.customPoint, coordinates } })),
   setPointName: (newName) => set(state => ({ ...state, customPoint: { ...state.customPoint, name: newName } })),
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
   resetForm: () => set(initialState),
