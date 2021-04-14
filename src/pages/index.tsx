@@ -9,7 +9,7 @@ const Map = dynamic(
 const Home = () => {
   return (
     <div className="mx-auto w-2/6">
-      <div>
+      <div>    
         <Map />
       </div>
       <PoiForm />
