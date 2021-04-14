@@ -7,7 +7,7 @@ const Home = () => {
     { ssr: false } // This line is important. It's what prevents server-side render
   )
   return (
-    <div className="mx-auto w-2/6">
+    <div className="mx-auto w-3/5">
       <div style={{zoom: '100%'}}>
         <Map />
       </div>
