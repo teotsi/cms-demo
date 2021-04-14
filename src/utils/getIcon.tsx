@@ -1,10 +1,11 @@
 import L from 'leaflet';
 import ReactDOMServer from 'react-dom/server';
 import BookIcon from '../assets/icons/Book';
-import SchoolIcon from '../assets/icons/School';
+import ComputerIcon from '../assets/icons/Computer';
 
 const icons = {
-    classroom: ()=><SchoolIcon />,
+    classroom: ()=><span className="text-4xl text-center">🏛</span>,
+    cslab: ()=><ComputerIcon />,
     library: ()=><BookIcon />
 }
 

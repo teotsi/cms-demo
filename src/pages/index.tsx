@@ -1,17 +1,18 @@
 import dynamic from 'next/dynamic';
 import PoiForm from '../components/poiForm';
 
+const Map = dynamic(
+  () => import('../components/map'), // replace '@components/map' with your component's location
+  { ssr: false } // This line is important. It's what prevents server-side render
+);
+
 const Home = () => {
-  const Map = dynamic(
-    () => import('../components/map'), // replace '@components/map' with your component's location
-    { ssr: false } // This line is important. It's what prevents server-side render
-  )
   return (
     <div className="mx-auto w-2/6">
-      <div style={{zoom: '100%'}}>
+      <div>
         <Map />
       </div>
-      <PoiForm/>
+      <PoiForm />
     </div>
   )
 
