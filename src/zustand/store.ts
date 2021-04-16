@@ -16,7 +16,7 @@ const initialState = {
 }
 export const useStore = create<State>(set => ({
   ...initialState,
-  setPoint: (coordinates) => set(state => ({ ...state, customPoint: { ...state.customPoint, coordinates } })),
+  setPoint: (coordinates) => set(state => ({ ...state, customPoint: { ...state.customPoint, ...coordinates } })),
   setPointName: (newName) => set(state => ({ ...state, customPoint: { ...state.customPoint, name: newName } })),
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
   resetForm: () => set(initialState),

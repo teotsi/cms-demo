@@ -8,7 +8,7 @@ const Map = dynamic(
 
 const Home = () => {
   return (
-    <div className="mx-auto w-2/6">
+    <div className="mx-auto w-3/5">
       <div>    
         <Map />
       </div>
