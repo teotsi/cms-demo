@@ -5,7 +5,7 @@ const ApiService = axios.create({
 });
 
 export const getAllPointsOfInterest = () => ApiService
-    .get('api/poi')
+    .get('poi')
     .then((res) => res.data)
     .catch(err => {
         console.log(err);
@@ -13,6 +13,6 @@ export const getAllPointsOfInterest = () => ApiService
     });
 
 export const registerPointOfInterest = (newPoi: PointOfInterest) => ApiService
-    .post('api/poi', newPoi)
+    .post('poi', newPoi)
     .then((res) => res.data)
     .catch(err => console.log(err));
