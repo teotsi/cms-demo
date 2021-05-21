@@ -21,8 +21,21 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-        "@app/*": ["./src/*"],
-        "@zustand/*": ["./src/zustand/*"]
+      "@app/*": [
+        "./src/*"
+      ],
+      "@components/*": [
+        "./src/components/*"
+      ],
+      "@icons": [
+        "./src/assets/icons/*"
+      ],
+      "@utils": [
+        "./src/utils/*"
+      ],
+      "@zustand/*": [
+        "./src/zustand/*"
+      ]
     },
     "isolatedModules": true
   },
