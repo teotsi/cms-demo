@@ -9,7 +9,6 @@ type State = {
   setPoint: (coordinates: Coordinates) => void,
   setPointName: (newName: string) => void,
   setPointAmenity: (newAmenity: string) => void,
-  resetForm: () => void,
   fetchPois: () => void,
   fetchAccessPoints: () => void,
 }
@@ -23,7 +22,6 @@ export const useStore = create<State>(set => ({
   setPoint: (coordinates) => set(state => ({ ...state, customPoint: coordinates })),
   setPointName: (newName) => set(state => ({ ...state, customPoint: { ...state.customPoint, name: newName } })),
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
-  resetForm: () => set(initialState),
   fetchPois: async () => {
     const pointsOfInterest = await getAllPointsOfInterest();
     set(state => ({ ...state, pointsOfInterest }));

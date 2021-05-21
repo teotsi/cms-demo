@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button, Dropdown, Input, Loader } from 'semantic-ui-react';
+import useReset from '../hooks/useReset';
 import { registerPointOfInterest } from '../utils/apiService';
 import { useStore } from '../zustand/store';
 
@@ -10,9 +11,9 @@ const PoiForm = () => {
     const [amenity, setAmenity] = useState(null);
     const setPoint = useStore(state => state.setPoint);
     const fetchPois = useStore(state => state.fetchPois);
-    const resetForm = useStore(state => state.resetForm);
     const disabled = !(name && amenity);
     const [loading, setLoading] = useState(false);
+    const resetForm = useReset();
     const poiOptions = [
         { key: 1, text: 'classroom', value: 'classroom' },
         { key: 2, text: 'cslab', value: 'cslab' },
@@ -30,7 +31,7 @@ const PoiForm = () => {
         setLoading(true);
         registerPointOfInterest({ ...customPoint, name, amenity }).then(() => {
             setLoading(false);
-            resetForm();
+            resetForm([setName, setAmenity]);
             fetchPois();
         });
     }

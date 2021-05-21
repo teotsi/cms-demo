@@ -1,3 +1,4 @@
+import useReset from '@app/hooks/useReset';
 import React, { useState } from 'react';
 import { Button, Input, Loader } from 'semantic-ui-react';
 import { registerAccessPoint } from '../utils/apiService';
@@ -10,17 +11,17 @@ const AccessPointForm = () => {
     const [bssid, setBssid] = useState(null);
     const [level, setLevel] = useState(null);
     const [h, setH] = useState(null);
+    const [loading, setLoading] = useState(false);
     const setPoint = useStore(state => state.setPoint);
     const fetchAccessPoints = useStore(state => state.fetchAccessPoints);
-    const resetForm = useStore(state => state.resetForm);
+    const resetForm = useReset();
     const disabled = !(ssid && bssid && level && h);
-    const [loading, setLoading] = useState(false);
 
     const addAccessPoint = () => {
         setLoading(true);
         registerAccessPoint({ ssid, bssid, level, h, position: customPoint }).then(() => {
             setLoading(false);
-            resetForm();
+            resetForm([setSsid, setBssid, setLevel, setH]);
             fetchAccessPoints();
         });
     }

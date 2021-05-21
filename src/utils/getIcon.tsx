@@ -11,7 +11,6 @@ const icons = {
 
 export const getCustomIcon = (type: string) => {
     const Icon = icons[type.toLowerCase()];
-    console.log(Icon);
     if (!Icon) return undefined;
     return L.divIcon({
         html: ReactDOMServer.renderToString(<Icon />),
