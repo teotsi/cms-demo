@@ -6,13 +6,14 @@ import { useStore } from '../zustand/store';
 const PoiForm = () => {
 
     const customPoint = useStore(state => state.customPoint);
-    const setName = useStore(state => state.setPointName);
-    const setAmenity = useStore(state => state.setPointAmenity);
+    const [name, setName] = useState(null);
+    const [amenity, setAmenity] = useState(null);
+    const setPoint = useStore(state => state.setPoint);
     const fetchPois = useStore(state => state.fetchPois);
     const resetForm = useStore(state => state.resetForm);
-    const disabled = !(customPoint?.name && customPoint?.amenity);
+    const disabled = !(name && amenity);
     const [loading, setLoading] = useState(false);
-    const options = [
+    const poiOptions = [
         { key: 1, text: 'classroom', value: 'classroom' },
         { key: 2, text: 'cslab', value: 'cslab' },
         { key: 3, text: 'gate', value: 'gate' },
@@ -27,40 +28,45 @@ const PoiForm = () => {
 
     const addPoi = () => {
         setLoading(true);
-        registerPointOfInterest(customPoint).then(() => {
+        registerPointOfInterest({ ...customPoint, name, amenity }).then(() => {
             setLoading(false);
             resetForm();
             fetchPois();
         });
     }
     return (
-        <div className="mt-5 flex justify-center">
-            <div>
-                <h3 className="text-xl font-semibold">Click on the map to create a new POI</h3>
-                <>
-                    <p>Lat: <span className="font-bold">{customPoint?.lat ?? '----'}</span></p>
-                    <p>Lon: <span className="font-bold">{customPoint?.lon ?? '----'}</span></p>
-                    <Input className="mt-2" placeholder="name" onChange={(e) => setName(e.target.value)} />
-                    <div>
 
-                        <Dropdown className="w-30 my-2"
-                            selection
-                            options={options}
-                            scrolling
-                            onChange={(e, { value }) => setAmenity(value as string)} />
-                    </div>
-                    <div className="flex items-center">
-                        <Button
-                            className="ml-2"
-                            disabled={disabled}
-                            primary
-                            onClick={addPoi}>Add POI</Button>
-                        <Loader active={loading} inline size='tiny' />
-                    </div>
-                </>
+        <>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="lat">Lat:</label>
+                <Input className="flex-grow" type="number" name="lat" value={customPoint?.lat ?? ''} placeholder="Lat" onChange={(e) => setPoint({ ...customPoint, lat: parseFloat(e.target.value) })} />
+            </div>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="lon">Lon:</label>
+                <Input className="flex-grow" type="number" name="lon" value={customPoint?.lon ?? ''} placeholder="Lon" onChange={(e) => setPoint({ ...customPoint, lon: parseFloat(e.target.value) })} />
             </div>
 
-        </div>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="name">Name:</label>
+                <Input className="flex-grow" name="name" placeholder="name" onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="name">Amenity:</label>
+                <Dropdown className="w-30 my-2 flex-grow"
+                    selection
+                    options={poiOptions}
+                    scrolling
+                    onChange={(e, { value }) => setAmenity(value as string)} />
+            </div>
+            <div className="flex items-center mb-5">
+                <Button
+                    className="ml-2"
+                    disabled={disabled}
+                    primary
+                    onClick={addPoi}>Add POI</Button>
+                <Loader active={loading} inline size='tiny' />
+            </div>
+        </>
     )
 }
 

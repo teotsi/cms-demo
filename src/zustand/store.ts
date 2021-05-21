@@ -1,27 +1,35 @@
 import create from 'zustand';
 import { getAllPointsOfInterest } from '../utils/apiService';
+import { getAllAccessPoints } from './../utils/apiService';
 
 type State = {
-  customPoint: PointOfInterest,
+  customPoint: Coordinates,
   pointsOfInterest: PointOfInterest[],
+  accessPoints: AccessPoint[],
   setPoint: (coordinates: Coordinates) => void,
   setPointName: (newName: string) => void,
   setPointAmenity: (newAmenity: string) => void,
   resetForm: () => void,
   fetchPois: () => void,
+  fetchAccessPoints: () => void,
 }
 const initialState = {
   customPoint: null,
   pointsOfInterest: [],
+  accessPoints: [],
 }
 export const useStore = create<State>(set => ({
   ...initialState,
-  setPoint: (coordinates) => set(state => ({ ...state, customPoint: { ...state.customPoint, ...coordinates } })),
+  setPoint: (coordinates) => set(state => ({ ...state, customPoint: coordinates })),
   setPointName: (newName) => set(state => ({ ...state, customPoint: { ...state.customPoint, name: newName } })),
   setPointAmenity: (newAmenity) => set(state => ({ ...state, customPoint: { ...state.customPoint, amenity: newAmenity } })),
   resetForm: () => set(initialState),
   fetchPois: async () => {
-    const pois = await getAllPointsOfInterest();
-    set(state => ({ ...state, pointsOfInterest: pois }));
+    const pointsOfInterest = await getAllPointsOfInterest();
+    set(state => ({ ...state, pointsOfInterest }));
+  },
+  fetchAccessPoints: async () => {
+    const accessPoints = await getAllAccessPoints();
+    set(state => ({ ...state, accessPoints }));
   }
 }))
