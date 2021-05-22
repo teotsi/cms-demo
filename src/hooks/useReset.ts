@@ -1,10 +1,10 @@
 import { useStore } from '../zustand/store';
 
-const useReset = () => {
+const useReset = (setters) => {
     const setPoint = useStore(state => state.setPoint);
-    return (setters) => {
+    return () => {
         setPoint(null);
-        setters.forEach(setter => setter(null))
+        setters.forEach(setter => setter(undefined))
     }
 }
 

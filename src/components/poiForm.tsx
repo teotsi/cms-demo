@@ -1,19 +1,17 @@
 import React, { useState } from 'react';
 import { Button, Dropdown, Input, Loader } from 'semantic-ui-react';
-import useReset from '../hooks/useReset';
 import { registerPointOfInterest } from '../utils/apiService';
 import { useStore } from '../zustand/store';
 
 const PoiForm = () => {
 
     const customPoint = useStore(state => state.customPoint);
-    const [name, setName] = useState(null);
+    const [name, setName] = useState('');
     const [amenity, setAmenity] = useState(null);
     const setPoint = useStore(state => state.setPoint);
     const fetchPois = useStore(state => state.fetchPois);
     const disabled = !(name && amenity);
     const [loading, setLoading] = useState(false);
-    const resetForm = useReset();
     const poiOptions = [
         { key: 1, text: 'classroom', value: 'classroom' },
         { key: 2, text: 'cslab', value: 'cslab' },
@@ -31,7 +29,8 @@ const PoiForm = () => {
         setLoading(true);
         registerPointOfInterest({ ...customPoint, name, amenity }).then(() => {
             setLoading(false);
-            resetForm([setName, setAmenity]);
+            setName('');
+            setAmenity('');
             fetchPois();
         });
     }
@@ -49,7 +48,7 @@ const PoiForm = () => {
 
             <div className="flex items-center mb-2 w-3/5">
                 <label className="font-bold mr-2" htmlFor="name">Name:</label>
-                <Input className="flex-grow" name="name" placeholder="name" onChange={(e) => setName(e.target.value)} />
+                <Input className="flex-grow" name="name" value={name} placeholder="name" onChange={(e) => setName(e.target.value)} />
             </div>
             <div className="flex items-center mb-2 w-3/5">
                 <label className="font-bold mr-2" htmlFor="name">Amenity:</label>
