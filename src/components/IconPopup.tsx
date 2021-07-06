@@ -2,7 +2,7 @@ import React from 'react'
 import { Marker, Popup } from 'react-leaflet'
 import { getCustomIcon } from '../utils/getIcon'
 
-const IconPopup = ({ name, lat, lon, type, description }: IconPopupProps) => {
+const IconPopup = ({ name, lat, lon, type, description = "" }: IconPopupProps) => {
     return (
         <Marker position={[lat, lon]} {...(getCustomIcon(type) ? { icon: getCustomIcon(type) } : {})}>
             <Popup>
@@ -19,7 +19,7 @@ const IconPopup = ({ name, lat, lon, type, description }: IconPopupProps) => {
 type IconPopupProps = Coordinates & {
     name: string,
     type: string,
-    description: string,
+    description?: string,
 }
 
 export default IconPopup
