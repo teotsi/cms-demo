@@ -7,30 +7,26 @@ const PoiForm = () => {
 
     const customPoint = useStore(state => state.customPoint);
     const [name, setName] = useState('');
+    const [description, setDescription] = useState('');
+    const [icon, setIcon] = useState('');
     const [amenity, setAmenity] = useState(null);
     const setPoint = useStore(state => state.setPoint);
     const fetchPois = useStore(state => state.fetchPois);
     const disabled = !(name && amenity);
     const [loading, setLoading] = useState(false);
     const poiOptions = [
-        { key: 1, text: 'classroom', value: 'classroom' },
-        { key: 2, text: 'cslab', value: 'cslab' },
-        { key: 3, text: 'gate', value: 'gate' },
-        { key: 4, text: 'hall', value: 'hall' },
-        { key: 5, text: 'library', value: 'library' },
-        { key: 6, text: 'office', value: 'office' },
-        { key: 7, text: 'restaurant', value: 'restaurant' },
-        { key: 8, text: 'service', value: 'service' },
-        { key: 9, text: 'store', value: 'store' },
-        { key: 10, text: 'toilets', value: 'toilets' },
+        { key: 1, text: 'utility', value: 'utility' },
+        { key: 2, text: 'commercial', value: 'commercial' },
     ]
 
     const addPoi = () => {
         setLoading(true);
-        registerPointOfInterest({ ...customPoint, name, amenity }).then(() => {
+        registerPointOfInterest({ ...customPoint, name, amenity, description, icon }).then(() => {
             setLoading(false);
             setName('');
             setAmenity('');
+            setDescription('');
+            setIcon('');
             fetchPois();
         });
     }
@@ -49,6 +45,14 @@ const PoiForm = () => {
             <div className="flex items-center mb-2 w-3/5">
                 <label className="font-bold mr-2" htmlFor="name">Name:</label>
                 <Input className="flex-grow" name="name" value={name} placeholder="name" onChange={(e) => setName(e.target.value)} />
+            </div>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="name">Description:</label>
+                <Input className="flex-grow" name="description" value={description} placeholder="description" onChange={(e) => setDescription(e.target.value)} />
+            </div>
+            <div className="flex items-center mb-2 w-3/5">
+                <label className="font-bold mr-2" htmlFor="name">Icon:</label>
+                <Input className="flex-grow" name="icon" value={icon} placeholder="icon" onChange={(e) => setIcon(e.target.value)} />
             </div>
             <div className="flex items-center mb-2 w-3/5">
                 <label className="font-bold mr-2" htmlFor="name">Amenity:</label>

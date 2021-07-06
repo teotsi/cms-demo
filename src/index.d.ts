@@ -6,6 +6,8 @@ declare module "*.svg" {
 declare type PointOfInterest = Coordinates & {
     name: string;
     amenity: string;
+    description?: string;
+    icon?: string;
 }
 
 declare type AccessPoint = {
