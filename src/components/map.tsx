@@ -28,6 +28,7 @@ const highways = [[[37.99426612034, 23.73257227175], [37.99426216011, 23.7325753
 const Map = () => {
   const pointsOfInterest = useStore(state => state.pointsOfInterest);
   const accessPoints = useStore(state => state.accessPoints);
+  const images = useStore(state => state.images);
 
   return (
     <MapContainer center={[37.99408909, 23.73246165]} zoom={19} scrollWheelZoom={false} style={{ height: 700, zIndex: 0 }}>
@@ -37,7 +38,7 @@ const Map = () => {
         url="http://a.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png"
       />
       <Polyline pathOptions={{ color: 'green' }} positions={highways as any} />
-      <MarketSet pois={pointsOfInterest} accessPoints={accessPoints} />
+      <MarketSet pois={pointsOfInterest} accessPoints={accessPoints} images={images}/>
     </MapContainer>
   )
 }

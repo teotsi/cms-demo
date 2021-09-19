@@ -29,3 +29,13 @@ export const registerAccessPoint = (newAccessPoint: AccessPoint) => ApiService
     .post('access-point', newAccessPoint)
     .then((res) => res.data)
     .catch(err => console.log(err));
+
+export const getAllImages = (): Promise<Image[]> => ApiService
+    .get('image')
+    .then((res) => res.data)
+    .catch(err => console.log(err));
+
+export const registerImage = (newImage: Image) => ApiService
+    .post('image', newImage)
+    .then((res) => res.data)
+    .catch(err => console.log(err));

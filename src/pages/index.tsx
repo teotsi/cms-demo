@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { useState } from 'react';
 import { Dropdown } from 'semantic-ui-react';
 import AccessPointForm from '../components/accessPointForm';
+import ImageForm from '../components/imageForm';
 import PoiForm from '../components/poiForm';
 
 const Map = dynamic(
@@ -14,7 +15,8 @@ const Home = () => {
   const [type, setType] = useState('poi');
   const typeOptions = [
     { key: 1, text: 'POI', value: 'poi' },
-    { key: 2, text: 'Access Point', value: 'access-point' }
+    { key: 2, text: 'Access Point', value: 'access-point' },
+    { key: 3, text: 'Image', value: 'image' }
   ]
 
   return (
@@ -29,7 +31,10 @@ const Home = () => {
           onChange={(e, { value }) => setType(value as string)}
           options={typeOptions} /></h3>
         {
-          { poi: <PoiForm />, 'access-point': <AccessPointForm /> }[type]
+          { poi: <PoiForm />, 
+            'access-point': <AccessPointForm />,
+            image: <ImageForm />
+          }[type]
         }
       </div>
     </div>

@@ -1,21 +1,24 @@
 import create from 'zustand';
-import { getAllPointsOfInterest } from '../utils/apiService';
+import { getAllImages, getAllPointsOfInterest } from '../utils/apiService';
 import { getAllAccessPoints } from './../utils/apiService';
 
 type State = {
   customPoint: Coordinates,
   pointsOfInterest: PointOfInterest[],
   accessPoints: AccessPoint[],
+  images: Image[],
   setPoint: (coordinates: Coordinates) => void,
   setPointName: (newName: string) => void,
   setPointAmenity: (newAmenity: string) => void,
   fetchPois: () => void,
   fetchAccessPoints: () => void,
+  fetchImages: () => void,
 }
 const initialState = {
   customPoint: null,
   pointsOfInterest: [],
   accessPoints: [],
+  images: [],
 }
 export const useStore = create<State>(set => ({
   ...initialState,
@@ -29,5 +32,9 @@ export const useStore = create<State>(set => ({
   fetchAccessPoints: async () => {
     const accessPoints = await getAllAccessPoints();
     set(state => ({ ...state, accessPoints }));
+  },
+  fetchImages: async () => {
+    const images = await getAllImages();
+    set(state => ({ ...state, images }));
   }
 }))

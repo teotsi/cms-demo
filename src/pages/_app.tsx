@@ -6,8 +6,10 @@ import { useStore } from "../zustand/store";
 const BaseApp = ({ Component, pageProps }) => {
     const fetchPois = useStore(state => state.fetchPois);
     const fetchAccessPoints = useStore(state => state.fetchAccessPoints);
+    const fetchImages = useStore(state => state.fetchImages);
     fetchPois();
     fetchAccessPoints();
+    fetchImages();
 
     return (
         <>

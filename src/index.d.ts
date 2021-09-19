@@ -29,3 +29,10 @@ declare type AccessPointPosition = Coordinates & {
     positionX?: number;
     positionY?: number;
 }
+
+declare type Image = Coordinates & {
+    classId: string;
+    description?: string;
+    uuid?: string;
+    distance?: number;
+}
